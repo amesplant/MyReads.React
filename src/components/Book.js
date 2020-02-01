@@ -2,20 +2,22 @@ import React, { Component } from 'react'
 import CategoryList from './CategoryList'
 
 class Book extends Component {
-    // TODO: Add State
-    // bookImage
-    // bookTitle
-    // bookAuthor
+
+    
     render() {
+        const { image, title, authors, previewLink } = this.props;
+        console.log("authors: ", authors);
         return (
-            <div className="book">
+            <a href={previewLink} className="book" target="_blank" >
                 <div className="book-top">
-                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${this.props.image})` }}></div>
+                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${image})` }}></div>
                     <CategoryList />
                 </div>
-                <div className="book-title">{this.props.title}</div>
-                <div className="book-authors">{this.props.author}</div>
-            </div>
+                <div className="book-title">{title}</div>
+                <div className="book-authors">
+                    {authors.join(', ')}
+                </div>
+            </a>
         )
     }
 }
