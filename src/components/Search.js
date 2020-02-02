@@ -24,12 +24,23 @@
  * -----------
  * Don't forget to add the following PropTypes
  * - updateBookShelf (function) --- just passing through
+ * 
+ * 
+ * Debounce
+ * --------
+ * https://www.npmjs.com/package/react-debounce-input
+ * Debouncing enforces that a function will not be called again 
+ * until a certain amount of time has passed since its last call. 
+ * As in “execute this function only if an amount of time 
+ * (ex. 100 milliseconds) have passed without it being called.”
+ * This will make fewer calls back to the API, which will improve
+ * performance on your app.
  ***************************************************************/
 
 import React, { Component } from 'react'
 import { PropTypes } from "prop-types";
-
 import { Link } from 'react-router-dom'
+import {DebounceInput} from 'react-debounce-input';
 import {search } from '../BooksAPI'
 
 import Book from './Book'
@@ -86,7 +97,9 @@ class Search extends Component {
                         to="/"
                     />
                     <div className="search-books-input-wrapper">
-                        <input 
+                        <DebounceInput
+                            minLength={2}
+                            debounceTimeout={100} 
                             type="text" 
                             placeholder="Search by title or author"
                             value={query} 
