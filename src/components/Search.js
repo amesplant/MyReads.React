@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import * as BooksAPI from '../BooksAPI'
+import {search } from '../BooksAPI'
 
 import Book from './Book'
 
@@ -15,10 +15,11 @@ class Search extends Component {
         }
     }
 
+    
     // get all of the books that match the search value (query)
     // in order to later map through the results, bookList needs to remain as an array
     showBooks = (query) => {
-        BooksAPI.search(query)
+        search(query)
         .then((books)=>{
             if (Array.isArray(books)) {
             this.setState(() => ({
@@ -34,11 +35,11 @@ class Search extends Component {
     }
         
     updateQuery = (event) => {
-        let query = event.target.value.trim()
+        let query = event.target.value.trim();
         this.setState({
             query: query
         })
-        this.showBooks(this.state.query);
+        this.showBooks(query);
     }
 
 

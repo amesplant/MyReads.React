@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 
 class CategoryList extends Component {
     
@@ -6,7 +7,12 @@ class CategoryList extends Component {
         let { book, updateBookShelf } = this.props;
         let shelf = event.target.value;
 
-        updateBookShelf(book, shelf);        
+        updateBookShelf(book, shelf); 
+
+        if(this.props.location.pathname !== '/') {
+            console.log(this.props.location.pathname);
+            this.props.history.push('/')    
+        }
     }
     
     render() {
@@ -28,4 +34,4 @@ class CategoryList extends Component {
 
 // TODO: Add PropTypes
 
-export default CategoryList
+export default withRouter(CategoryList)
