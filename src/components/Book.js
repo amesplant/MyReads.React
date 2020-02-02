@@ -1,35 +1,37 @@
-import React, { Component } from 'react'
-import CategoryList from './CategoryList'
+import React from 'react';
+import { PropTypes } from "prop-types";
 
-class Book extends Component {
+import CategoryList from './CategoryList';
+
+const Book = (props) => {
+
+    const { book, updateBookShelf } = props;
+    const bookImage = book.imageLinks ? `${book.imageLinks.smallThumbnail}` : '/images/no_image_available.gif'
+                                
     
-    render() {
+    return (
+        <div className="book">
+            <a className="book-top" href={book.previewLink} target="_blank" rel="noopener noreferrer">
+                <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${bookImage})` }}></div>
+            </a>
+            <CategoryList 
+                book={book}
+                updateBookShelf={updateBookShelf} 
+            />
+            <div className="book-title">{book.title}</div>
 
-        const { book, updateBookShelf } = this.props;
-        const bookImage = book.imageLinks ? `${book.imageLinks.smallThumbnail}` : '/images/no_image_available.gif'
-                                   
-        
-        return (
-            <div className="book">
-                <a className="book-top" href={book.previewLink} target="_blank" rel="noopener noreferrer">
-                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${bookImage})` }}></div>
-                </a>
-                <CategoryList 
-                    book={book}
-                    updateBookShelf={updateBookShelf} 
-                />
-                <div className="book-title">{book.title}</div>
+            {book.authors &&
+                <div className="book-authors">
+                    {book.authors.join(', ')}
+                </div>
+            }
+        </div>
+    );
+};
 
-                {book.authors &&
-                    <div className="book-authors">
-                        {book.authors.join(', ')}
-                    </div>
-                }
-            </div>
-        )
-    }
-}
+Book.propTypes = {
+    book: PropTypes.object.isRequired,
+    updateBookShelf: PropTypes.func.isRequired
+};
 
-// TODO: Add PropTypes
-
-export default Book
+export default Book;

@@ -35,7 +35,7 @@ class Search extends Component {
     }
         
     updateQuery = (event) => {
-        let query = event.target.value.trim();
+        let query = event.target.value;
         this.setState({
             query: query
         })
