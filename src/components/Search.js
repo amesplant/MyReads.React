@@ -1,4 +1,34 @@
+/***************************************************************
+ * Search
+ * ---------
+ * This component is to search for books to add to the BookShelf
+ * Since it holds state (the search query and books), 
+ * it needs to be a Class Component
+ * 
+ * handleSearch
+ * ------------
+ * method to search the Books database based on the user's query
+ * - capture what the user types into the input query
+ * - update the query state
+ * - display the books that match the search query (showBooks)
+ * 
+ * showBooks
+ * --------
+ * - make sure that the fetch returns an Array of books
+ *   before attempting to show the books
+ * - if an array of books is returned, update the 'books' state
+ * - if no books are found, set the 'books' state to an empty array
+ * -- changing the state will automatically force the UI to render again
+ * 
+ * PropTypes
+ * -----------
+ * Don't forget to add the following PropTypes
+ * - updateBookShelf (function) --- just passing through
+ ***************************************************************/
+
 import React, { Component } from 'react'
+import { PropTypes } from "prop-types";
+
 import { Link } from 'react-router-dom'
 import {search } from '../BooksAPI'
 
@@ -11,33 +41,33 @@ class Search extends Component {
 
         this.state = {
             query:'',
-            bookList:[]
+            books:[]
         }
     }
 
     
     // get all of the books that match the search value (query)
-    // in order to later map through the results, bookList needs to remain as an array
+    // in order to later map through the results, books needs to remain as an array
     showBooks = (query) => {
         search(query)
         .then((books)=>{
             if (Array.isArray(books)) {
             this.setState(() => ({
-                bookList: books 
+                books 
             }))
         } else {
               // not found
                this.setState({
-                   bookList: []
+                   books: []
                })} 
             
         })
     }
         
-    updateQuery = (event) => {
+    handleSearch = (event) => {
         let query = event.target.value;
         this.setState({
-            query: query
+            query
         })
         this.showBooks(query);
     }
@@ -45,7 +75,7 @@ class Search extends Component {
 
     render() {
         
-        const { query, bookList } = this.state;
+        const { query, books } = this.state;
         const { updateBookShelf } = this.props;
 
         return (
@@ -60,13 +90,13 @@ class Search extends Component {
                             type="text" 
                             placeholder="Search by title or author"
                             value={query} 
-                            onChange={this.updateQuery}
+                            onChange={this.handleSearch}
                         />
                     </div>
                 </div>
                 <div className="search-books-results">
                     <ol className="books-grid">
-                        {bookList.map((book) => (
+                        {books.map((book) => (
                             <li key={book.id} className="books-grid li">
                                 <Book 
                                     book={book} 
@@ -81,6 +111,8 @@ class Search extends Component {
     }
 }
 
-// TODO: Add PropTypes
+Search.propTypes = {
+    updateBookShelf: PropTypes.func.isRequired
+}
 
 export default Search

@@ -1,3 +1,22 @@
+/***************************************************************
+ * BookShelf
+ * ---------
+ * This component holds all of the shelves with all the books
+ * It holds no state, so therefore can be a functional component
+ * 
+ * It needs to send in 3 different Shelf components to display the 
+ * following shelves 
+ * - Currently Reading
+ * - Want to Read
+ * - Read
+ * 
+ * PropTypes
+ * -----------
+ * Don't forget to add the following PropTypes
+ * - bookshelf (array) -- list of books 
+ * - updateBookShelf (function) --- just passing through
+ ***************************************************************/
+
 import React from 'react';
 import  { Link } from 'react-router-dom';
 import { PropTypes } from "prop-types";
