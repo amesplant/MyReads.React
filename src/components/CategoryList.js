@@ -3,9 +3,21 @@ import { withRouter } from 'react-router-dom'
 
 class CategoryList extends Component {
     
+    constructor(props) {
+        super();
+
+        this.state = {
+            shelf: props.book.shelf
+        }
+    }
+
     handleShelfChange = (event) => {
         let { book, updateBookShelf } = this.props;
         let shelf = event.target.value;
+
+        this.setState({
+            shelf
+        })
 
         updateBookShelf(book, shelf); 
 
@@ -20,7 +32,7 @@ class CategoryList extends Component {
 
         return (
             <div className="book-shelf-changer">
-                <select onChange={this.handleShelfChange}>
+                <select value={this.state.shelf} onChange={this.handleShelfChange}>
                     <option value="move" disabled>Move to...</option>
                     <option value="none">None</option>
                     <option value="currentlyReading">Currently Reading</option>
