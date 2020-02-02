@@ -2,10 +2,10 @@
 
 Final assessment project for Udacity's React Fundamentals course. 
 The projects allows users to add/move books in a book shelf and categorize them as 
-    - currently reading
-    - want to read
-    - read
-    - none (removal from bookshelf)
+- currently reading
+- want to read
+- read
+- none (removal from bookshelf)
 
 ## TL;DR
 
