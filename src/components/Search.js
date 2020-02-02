@@ -45,6 +45,7 @@ class Search extends Component {
     render() {
         
         const { query, bookList } = this.state;
+        const { updateBookShelf } = this.props;
 
         return (
             <div className="search-books">
@@ -67,12 +68,8 @@ class Search extends Component {
                         {bookList.map((book) => (
                             <li key={book.id} className="books-grid li">
                                 <Book 
-                                    title={book.title} 
-                                    authors={book.authors} 
-                                    image={
-                                        book.imageLinks ? `${book.imageLinks.smallThumbnail}` : '/images/no_image_available.gif'
-                                    }
-                                    previewLink={book.previewLink}
+                                    book={book} 
+                                    updateBookShelf = {updateBookShelf}
                                 />
                             </li>
                         ))}

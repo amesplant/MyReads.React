@@ -1,16 +1,25 @@
 import React, { Component } from 'react'
 
 class CategoryList extends Component {
-    // TODO: Add State
+    
+    handleShelfChange = (event) => {
+        let { book, updateBookShelf } = this.props;
+        let shelf = event.target.value;
+
+        updateBookShelf(book, shelf);        
+    }
+    
     render() {
+
+
         return (
             <div className="book-shelf-changer">
-                <select>
+                <select onChange={this.handleShelfChange}>
                     <option value="move" disabled>Move to...</option>
+                    <option value="none">None</option>
                     <option value="currentlyReading">Currently Reading</option>
                     <option value="wantToRead">Want to Read</option>
                     <option value="read">Read</option>
-                    <option value="none">None</option>
                 </select>
             </div>
         )
